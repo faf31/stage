@@ -1,0 +1,46 @@
+{% extends 'users.html.twig' %}
+
+{% block title %}Gerer les categories
+{% endblock %}
+
+{% block body %}
+	<div class="container led">
+		<div class="airforce txt-white txt-center rounded-4 ">
+			<h1>Gerer les catégories<h1></div>
+
+
+				<a href="{{path("admin_categories_ajout")}}" class="btn success press modal-trigger bout mt-3 rounded-4">Ajouter une catégorie</a>
+
+			<table class="table table-striped table-dark led ">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nom</th>
+						<th>Parent</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for categorie in categories %}
+						<tr>
+							<td>{{categorie.id}}</td>
+							<td>{{categorie.name}}</td>
+							<td>{{categorie.parent}}</td>
+							<td>
+								<a href="{{path("admin_categoriemodifier",{id:categorie.id})}}" class="btn green rounded-4">Modifier</a>
+							</td>
+							<td>
+								<a href="{{path("admin_categoriedeletecat",{id:categorie.id})}}" class="btn primary press modal-trigger rounded-4" onclick="return confirm ('Êtes-vous sur de vouloir supprimer cette catégorie') ">Supprimer</a>
+							</td>
+
+
+						</tr>
+
+					{% endfor %}
+
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>{% endblock %}

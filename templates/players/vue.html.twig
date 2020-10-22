@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	{{player.nom}}
+{% endblock %}
+{% block body %}
+
+	<img src="{{asset('/upload/' ~ player.images[0].name)}}" class="img-circle img-fluid  mx-auto d-block " width="600" alt="{{player.nom}}">
+	<div class="center ">
+
+		<div class="bg-white mt-2">
+										
+			<div class="container led">
+				<h1 class="display-4 text-info">PRESENTATION</h1>
+				<p class="lead"></p>
+				<p>Je m'appelle
+					<b>{{player.nom}}</b>
+				</p>
+				<p>Mon poste est
+					<b>{{player.poste}}</b>
+				</p>
+			</p>
+			<p>Je mesure
+				<b>{{player.taille}}cm</b>
+			</p>
+		</p>
+		<p>Qui suis-je ?
+			<b>
+				<em>{{player.content }}</em>
+			</b>
+		</p>
+	</p>
+	<p>L'année dernière je jouais au :
+		<b>{{player.ancienClub}}</b>
+	</p>
+</p>
+<p>Vous pouvez me joindre à cette adresse mail :
+	<b>{{player.adresseMail}}</b>
+</p>
+<input type="file" name="video" class="mb-5"></p></div></p></div>{% if is_granted('ROLE_USER') %}<a href="{{ path('players_edit', {'id': player.id}) }} " class="btn btn-warning">Modifier</a>{% endif %}</div>{% endblock %}

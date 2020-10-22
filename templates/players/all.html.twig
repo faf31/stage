@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+{% block title %}joueurs{% endblock %}
+{% block body %}
+
+<div class="row flex led ">
+{% for player in players %}
+<div class="col-sm-6 col-md-4">
+
+<div class="card-deck">
+  <div class="card mb-2px">
+    <img src="{{asset('/upload/' ~ player.images[0].name)}}" class="card-img-top mx-auto d-block img-thumbnail " alt="{{player.nom}}">
+    <div class="card-body">
+      <h5 class="card-title text-center"><em> {{player.nom}}</em></h5>
+      <div class="divider"></div>
+
+      <p class="card-text"><b>Poste</b> :<br>{{player.poste}}</p>
+            <div class="divider"></div>
+
+       <p class="card-text"><b>Taille</b> :<br>{{player.taille}}cm</p>
+             <div class="divider"></div>
+
+       <p class="card-text"><b>Présentation</b> :<br>{{player.content |u.truncate(80,'...',false)|raw}}</p>
+        <div class="divider"></div>
+
+      <p class="card-text"><b>Email</b> :<br>{{player.adresseMail}}</p>
+      <div class="divider"></div>
+
+      <p class="card-text"><b>Ancien club</b> :<br>{{player.ancienClub}}</p>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg btn-block"><a href="{{ path('players_vue', {'id': player.id}) }}">Lire la suite</a></button>
+
+    <div class="card-footer text-center">
+      <small class="text-muted">Posté le {{player.createdAt|date('d/m/y à h\\hi')}}</small>
+    </div>
+  </div>
+  </div>
+  </div>
+{% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{# <div class="row flex ">
+{% for player in players %}
+					<div class="col-4">
+
+<div class="card" >
+  <img class="imgp" src="{{asset('/upload/' ~ player.images[0].name)}}" class="card-img-top rounded-circle "  alt="{{player.nom}}">
+  <div>
+    <h5 class="card-title">Nom : {{player.nom}}</h5>
+    <hr>
+    <p class="card-text">Poste : {{player.poste}}
+</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Taille : {{player.taille}}cm </li>
+    <li class="list-group-item">Description : {{player.content |u.truncate(20,'...',false)|raw}}</li>
+     <li class="list-group-item">Email : {{player.adresseMail}}</li>
+    <li class="list-group-item">Ancien club : {{player.ancienClub}}</li>
+  </ul>
+  <div class="card">
+ <a href="{{ path('players_vue', {'id': player.id}) }}"class="btn btn-success">Voir</a>
+  </div>
+  
+</div>
+</div>
+{% endfor %}
+</div> #}
+				{{ knp_pagination_render(players) }}
+
+{% endblock %}

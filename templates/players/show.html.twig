@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Players{% endblock %}
+
+{% block body %}
+    <h1>Players</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ player.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ player.nom }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ player.content }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('players_accueil') }}">Accueil</a>
+
+    <a href="{{ path('players_edit', {'id': player.id}) }}">Modifier</a>
+
+    {{ include('players/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creation joueurs{% endblock %}
+
+{% block body %}
+    <h1>Creation profil joueurs</h1>
+
+    {{ include('players/_form.html.twig') }}
+
+    <a class="btn btn-success mb-2 mt-3" href="{{ path('players_accueil') }}">accueil</a>
+{% endblock %}

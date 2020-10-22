@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableaux joueurs{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Tableau Joueurs</h1>
+    <a href="{{ path('players_new') }}" class="btn btn-primary">Créer nouveau Joueur</a>
+
+    <table class="table table-striped txt-black container-fluid">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Content</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.id }}</td>
+                <td>{{ player.nom }}</td>
+                <td>{{ player.content| u.truncate(30,'...',false)|raw }}</td>
+                <td>
+                    <a href="{{ path('players_show', {'id': player.id}) }}" class="btn btn-warning">Voir</a>
+                    <a href="{{ path('players_edit', {'id': player.id}) }}"class="btn btn-success">Modifier</a>
+  <p>{{ include('players/_delete_form.html.twig') }}</p>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

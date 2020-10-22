@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{annonce.title}}{% endblock %}
+
+{% block body %}
+<div class="container led">
+{% for message in app.flashes('message') %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endfor %}
+<div class="row">
+<div class="col md-6">
+<div>
+<h2><em>{{annonce.title}}</em></h2>
+    <p>Publié le {{ annonce.createdAt|date('d/m/y à h\\hi') }} par <b>{{annonce.users.firstname}}</b>
+<div>{{ annonce.content|raw }}</div>
+</div>
+<hr>
+
+{% for commentaire in annonce.commentaires %}
+<div class="alert alert-success" role="alert">
+
+      <p>publie par <h4>{{commentaire.pseudo}}</h4>le  <em>{{ annonce.createdAt|date('d/m/y à h\\hi') }}</em> </p>
+<p><a href="#">{{commentaire.email}}</a></p>
+  <p>{{commentaire.content}}</p>
+  <hr>
+</div>
+    <div>
+    
+
+{% endfor %}
+
+<div><h2>Ajouter un commentaire</h2> <p>nombre de commentaires ({{annonce.commentaires|length}})</p></div>
+<div>
+{{form_start(form)}}
+{{form_widget(form)}}
+{{form_end(form)}}
+<p>
+{% if is_granted('ROLE_USER') %}
+<button class="btn primary press modal-trigger" data-target="modale-contact"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-open" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z"/>
+</svg> Contacter l'annonceur</button>
+{% endif %}
+</p>
+</div>
+</div>
+<div class="modal white falling" id="modale-contact">
+
+  <div class="modal-header">Contacter l'annonceur</div>
+  <div class="divider"></div>
+  {{form_start(formu)}}
+  <div class="modal-content">
+    {{form_widget(formu.title)}}
+    {{form_row(formu.email)}}
+    {{form_row(formu.message)}}
+  </div>
+  <div class="divider"></div>
+  <div class="modal-footer">
+  <button class="btn small primary">Envoyer</button>
+    <button data-target="modale-contact" class="ml-auto btn small secondary modal-trigger">Fermer</button>
+  </div>
+  {{form_end(formu)}}
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    <script >
+    window.onload =()=>{
+      document.querySelector("#annonce_contact_title").value ="{{annonce.title}}"
+    }
+    let modal=new Modal('#modale-contact');
+
+    </script>
+{% endblock %}

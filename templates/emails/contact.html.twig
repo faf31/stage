@@ -1,0 +1,13 @@
+<h1>Nouveau Contact</h1>
+{% for message in app.flashes('message') %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endfor %}
+<p>De :
+	{{mail}}</p>
+
+<p>Sujet :{{
+    sujet
+}}
+</p>
+<p>Message :
+	{{message|raw}}</p>

@@ -1,0 +1,51 @@
+{% extends 'users.html.twig' %}
+
+{% block title %}Gerer les annonces
+{% endblock %}
+
+{% block body %}
+	<div class="container led">
+		<div class="airforce txt-white txt-center rounded-4 ">
+			<h1>Gerer les annonces<h1></div>
+
+
+				<a href="{{path("users_annonces_ajout")}}" class="btn primary press modal-trigger bout mt-3 rounded-4">Ajouter une annonce</a>
+
+
+				<table class="table table-striped led tablo bg-white ">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Club</th>
+							<th>titre</th>
+							<th>Date</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for annonce in annonces %}
+							<tr>
+								<td>{{annonce.id}}</td>
+								<td>{{annonce.clubName}}</td>
+								<td>{{annonce.title}}</td>
+								<td>{{annonce.createdAt | date('d/m/Y')}}</td>
+								<td>
+									<a href="{{path("admin_annoncesmodifier",{id:annonce.id})}}" class="btn success press modal-trigger rounded-4">modifier</a>
+								</td>
+
+								<td>
+									<a href="{{path("admin_annoncesdelete",{id:annonce.id})}}" class="btn primary press modal-trigger rounded-4" onclick="return confirm ('Êtes-vous sur de vouloir supprimer cette annonce')">Supprimer</a>
+								</td>
+
+							</tr>
+
+						{% endfor %}
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</div>
+	{% endblock %}
+	{% block script %}{% endblock %}

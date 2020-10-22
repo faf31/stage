@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+{# verifier si la route est players_edit on affiche les images #}
+{% if app.request.attributes.get('_route')=='players_edit' %}{% endif %}
+<h2>Images</h2>
+{% for image in player.images %}
+    <div>
+    <img src="{{asset('/upload/' ~ image.name)}}" alt="Image" width="150" height="150">
+    <a href="{{path('players_delete_image',{id:image.id})}}" data-delete data-token="{{csrf_token('delete' ~ image.id)}}">Supprimer</a>
+    </div>
+{% endfor %}
+
+    <button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

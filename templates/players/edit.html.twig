@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification Players{% endblock %}
+
+{% block body %}
+    <h1>Modifier Profil</h1>
+
+    {{ include('players/_form.html.twig', {'button_label': 'Mettre a jour'}) }}
+
+    <a href="{{ path('players_accueil') }}">Accueil</a>
+
+    {{ include('players/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+<script src="{{asset('js/images.js')}}"></script>
+{% endblock %}
