@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentaires index
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<h1> Tableau des Commentaires </h1>
+
+	<table class="table table-dark rounded-3 text-white">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Content</th>
+				<th>Email</th>
+				<th>Pseudo</th>
+                <th>Rgpd</th>
+				<th>CreatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for commentaire in commentaires %}
+				<tr>
+					<td>{{ commentaire.id }}</td>
+					<td>{{ commentaire.content }}</td>
+					<td>{{ commentaire.email }}</td>
+					<td>{{ commentaire.pseudo }}</td>
+					<td>{{ commentaire.rgpd ? 'Yes' : 'No' }}</td>
+					<td>{{ commentaire.createdAt ? commentaire.createdAt|date('d-m-Y H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('commentaires_show', {'id': commentaire.id}) }}">Voir</a>
+						<a href="{{ path('commentaires_edit', {'id': commentaire.id}) }}">Editer</a>
+						<a href="{{ path('commentaires_delete', {'id': commentaire.id}) }}">Supprimer</a>
+
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{# <a href="{{ path('commentaires_new') }}">Create new</a> #}
+    </div>
+{% endblock %}

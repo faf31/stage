@@ -102,6 +102,11 @@ class Annonces
     {
         return $this->slug;
     }
+    public function __toString()
+    {
+        return $this->title;
+    }
+
 
     // public function setSlug(string $slug): self
     // {
