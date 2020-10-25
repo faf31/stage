@@ -141,5 +141,18 @@ if($form->isSubmitted()&& $form->isValid()){
 
         );        
     }
+    /**
+     * @Route("/club", name="app_club")
+     */
+
+    public function club(){
+        return $this->render('main/club.html.twig', 
+
+            
+
+
+        );        
+    }
 }
+
 
